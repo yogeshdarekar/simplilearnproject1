@@ -13,7 +13,7 @@ session_start();
 
 		<title>Online Shopping</title>
 
-		<!-- Google font -->
+		<!-- test Google fonttest -->
 		<link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
 
 		<!-- Bootstrap -->
