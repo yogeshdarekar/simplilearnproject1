@@ -1,0 +1,5 @@
+ansible-vault encrypt /etc/ansible/hosts
+ansible-vault view /etc/ansible/hosts
+ansible-vault edit /etc/ansible/hosts
+ansible-playbook  --ask-vault-pass  nginx.yml
+ansible-vault decrypt /etc/ansible/hosts

@@ -1,0 +1,18 @@
+# cat Dockerfile 
+#Get the Centos images
+FROM centos:7
+
+#update the package
+RUN yum -y update
+
+#This will install the software
+RUN yum -y install epel-release
+RUN yum -y install  nginx
+
+#Copy config
+
+COPY ./nginx.conf /etc/nginx/
+
+ENTRYPOINT ["/usr/sbin/nginx", "-g", "daemon off;"]
+#This will open the port
+EXPOSE 9090

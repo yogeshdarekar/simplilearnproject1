@@ -1,0 +1,29 @@
+ansible -i /root/project1/dev -m file -a "path=/tmp/demo state=directory mode=0777" all
+ls -l /tmp/
+ansible -i dev -m copy -a "src=/tmp/ajay.txt dest=/tmp/demo/ajay.txt" all
+ansible -i /root/project1/dev -m copy -a "src=/tmp/ajay.txt dest=/tmp/demo/ajay.txt" all
+cd /tmp/demo/
+cat ajay.txt 
+#ansible -i dev -m copy -a "src=/tmp/demo/ajay.txt dest=/tmp/ajay.txt  remote_src=yes" all
+cd 
+cd project1/
+ls
+ansible -i dev -m copy -a "src=/tmp/demo/ajay.txt dest=/tmp/ajay.txt  remote_src=yes" all
+ansible -i dev -m copy -a "shell:/usr/bin/free" all
+ansible -i dev -m copy -a "shell=/usr/bin/free" all
+ansible -i dev -m copy -a shell="/usr/bin/free" all
+ansible -i dev -m shell="/usr/bin/free" all
+whreis free
+whereis free
+ansible -i dev -m shell -a "/usr/bin/free -m" all
+ansible -i dev -m shell -a "dh -h" all
+ansible -i dev -m shell -a "df -h" all
+ansible -i dev -m shell -a "ls -l /tmp/" all
+history 
+ansible -i dev -m shell -a "ls -l /tmp/" all
+vim webserver.yml
+ansible-playbook -i dev webserver.yml 
+vi index.html
+cat dev 
+vim webserver.yml
+ansible-playbook -i dev webserver.yml 

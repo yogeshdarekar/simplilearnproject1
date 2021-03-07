@@ -1,0 +1,75 @@
+pipeline {
+          agent {         
+             label 'master'
+          }
+          tools {
+              maven 'mvn3'
+              jdk 'java1.8'
+
+          }
+          parameters{
+                 name: 'INPUT',
+                 choice: [ 'TRUE', 'FALSE']
+
+          }
+          stages {
+
+            stage ('Code Checkout') {  
+                when{
+                    expression{ "${INPUT}" == 'TRUE' }
+              }   
+              steps{
+                  git credentialsId: 'yogesh1986.darekar@gmail.com', branch: 'master', url: 'https://github.com/yogeshdarekar/simplilearnproject1'
+
+              }
+            }  
+            stage ('Parallel'){
+             parallel {
+                    stage('Code Validate') {
+                        steps {
+                            script {
+                                sh """
+                                mvn validate
+                                """       
+                                }
+                        }
+
+        }
+                    stage('Code Compile') {
+                        steps {
+                            script {
+                                sh """
+                                mvn compile
+                                """       
+                                }
+                        }
+                        
+        }
+            }
+            }
+            stage('Code Test') {
+                steps {
+                    catchError (buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+                    script {
+                        sh """
+                        mvn test
+                        """       
+                         }
+                    }
+                   
+                  
+                }
+                
+}
+            stage('Package') {
+                steps {
+                    script {
+                        sh """
+                        mvn package
+                        """       
+                         }
+                }
+                
+}
+          }
+}
